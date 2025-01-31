@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tor Node Status</title>
+    <script>
+        async function fetchTorStatus() {
+            const response = await fetch('/status');
+            const data = await response.json();
+            document.getElementById('nickname').innerText = data.nickname || "Unknown";
+            document.getElementById('version').innerText = data.version || "Unknown";
+            document.getElementById('uptime').innerText = data.uptime || "Unknown";
+            document.getElementById('bandwidth').innerText = data.bandwidth || "Unknown";
+        }
+
+        setInterval(fetchTorStatus, 5000);
+        window.onload = fetchTorStatus;
+    </script>
+</head>
+<body>
+    <h1>Tor Node Status</h1>
+    <p><strong>Nickname:</strong> <span id="nickname">Loading...</span></p>
+    <p><strong>Version:</strong> <span id="version">Loading...</span></p>
+    <p><strong>Uptime:</strong> <span id="uptime">Loading...</span></p>
+    <p><strong>Bandwidth:</strong> <span id="bandwidth">Loading...</span></p>
+</body>
+</html>
